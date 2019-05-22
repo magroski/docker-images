@@ -27,11 +27,15 @@ get_tag() {
 build_app() {
     docker build --tag ${IMAGE_NAME}:cli "${IMAGES_DIR}/php-cli"
     docker tag ${IMAGE_NAME}:cli ${IMAGE_NAME}:cli-$(get_tag)
+    docker build --tag ${IMAGE_NAME}:cli-phalcon "${IMAGES_DIR}/php-cli-phalcon-3.4"
+    docker tag ${IMAGE_NAME}:cli-phalcon ${IMAGE_NAME}:cli-phalcon-$(get_tag)
 }
 
 push_app() {
     docker push ${IMAGE_NAME}:cli
     docker push ${IMAGE_NAME}:cli-$(get_tag)
+    docker push ${IMAGE_NAME}:cli-phalcon
+    docker push ${IMAGE_NAME}:cli-phalcon-$(get_tag)
 }
 
 scream "Building Flux's images with tag $(get_tag)"
